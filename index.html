@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenida</title>
+    <style>
+        :root {
+            --bg-gradient: radial-gradient(circle at 50% 50%, #12131c 0%, #08090c 100%);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glow-color-1: #6366f1;
+            --glow-color-2: #a855f7;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Orbes de luz de fondo */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.4;
+            z-index: 1;
+            animation: float 20s infinite alternate ease-in-out;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--glow-color-1);
+            top: -10%;
+            left: -10%;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: var(--glow-color-2);
+            bottom: -15%;
+            right: -10%;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 40px) scale(1.1); }
+        }
+
+        /* Tarjeta Glassmorphism */
+        .welcome-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            padding: 3.5rem 2.5rem;
+            border-radius: 24px;
+            width: 90%;
+            max-width: 480px;
+            text-align: center;
+            z-index: 10;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        /* Contenedor del Logo 3D */
+        .logo-container {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem auto;
+            position: relative;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .logo-cube {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.01));
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            transform: rotateZ(45deg);
+        }
+
+        .logo-icon {
+            transform: rotateZ(-45deg);
+            transition: transform 0.8s ease;
+            width: 32px;
+            height: 32px;
+            fill: #fff;
+            filter: drop-shadow(0 0 8px var(--glow-color-1));
+        }
+
+        .logo-container:hover .logo-cube {
+            transform: rotateZ(225deg);
+            border-color: var(--glow-color-2);
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.4);
+        }
+
+        .logo-container:hover .logo-icon {
+            transform: rotateZ(-225deg);
+            fill: #a855f7;
+        }
+
+        /* Textos */
+        h1 {
+            color: var(--text-primary);
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(135deg, #ffffff 30%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Botón de Acción */
+        .cta-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: #ffffff;
+            color: #08090c;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            border-radius: 14px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .cta-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            transform: skewX(-20deg);
+            transition: none;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+            background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+        }
+
+        .cta-btn:hover::after {
+            left: 150%;
+            transition: all 0.6s ease;
+        }
+
+        /* Redes Sociales */
+        .social-container {
+            display: flex;
+            justify-content: center;
+            gap: 1.25rem;
+            margin-top: 2.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 2rem;
+        }
+
+        .social-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
+        }
+
+        .social-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        /* Hover de Redes Sociales con colores de marca */
+        .social-icon.twitter:hover { color: #1da1f2; background: rgba(29, 161, 242, 0.1); border-color: #1da1f2; box-shadow: 0 0 15px rgba(29, 161, 242, 0.2); }
+        .social-icon.instagram:hover { color: #e1306c; background: rgba(225, 48, 108, 0.1); border-color: #e1306c; box-shadow: 0 0 15px rgba(225, 48, 108, 0.2); }
+        .social-icon.github:hover { color: #ffffff; background: rgba(255, 255, 255, 0.1); border-color: #ffffff; box-shadow: 0 0 15px rgba(255, 255, 255, 0.2); }
+        .social-icon.linkedin:hover { color: #0077b5; background: rgba(0, 119, 181, 0.1); border-color: #0077b5; box-shadow: 0 0 15px rgba(0, 119, 181, 0.2); }
+
+        .social-icon:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Orbes decorativos del fondo -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <!-- Tarjeta Principal -->
+    <main class="welcome-card">
+        
+        <!-- Logo Interactivo 3D -->
+        <div class="logo-container">
+            <div class="logo-cube">
+                <!-- Icono de Rayo SVG -->
+                <svg class="logo-icon" viewBox="0 0 24 24">
+                    <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Textos principales -->
+        <h1>Bienvenido</h1>
+        <p>Estás ante un espacio diseñado meticulosamente para ofrecer una experiencia visual inmersiva. Explora lo que tenemos preparado para ti.</p>
+
+        <!-- Botón de Entrada -->
+        <a href="#" class="cta-btn">Comenzar Experiencia</a>
+
+        <!-- Enlaces a Redes Sociales con SVG integrados -->
+        <div class="social-container">
+            <!-- X / Twitter -->
+            <a href="#" class="social-icon twitter" aria-label="X">
+                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <!-- Instagram -->
+            <a href="#" class="social-icon instagram" aria-label="Instagram">
+                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <!-- GitHub -->
+            <a href="#" class="social-icon github" aria-label="GitHub">
