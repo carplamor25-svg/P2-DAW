@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<!-- // Realizado por Carlos Plata Morán
+// Ejercicio 4 formulario con php en html  -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4 Formulario PHP</title>
+</head>
+<body>
+    <form action="05loguin_basico.php" method="POST">
+        <label for="usuario">Usuario: </label>
+        <input type="text" id="usuario" name="usuario"><br>
+        <!-- EL id del input se asiocia al label y a 
+        javascript y el name es la variable que se manda a php 
+        $_POST['usuario']-->
+        <label for="clave">Contraseña</label>
+        <input type="password" id="clave" name="clave"><br>
+        <input type="submit" value="Aceptar">
+    </form>
+</body>
+</html>
